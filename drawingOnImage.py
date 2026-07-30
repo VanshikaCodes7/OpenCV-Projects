@@ -5,6 +5,26 @@ import numpy as np
 def nothing(x):
     pass
 
+def save_edited_image(image_to_save):
+    """Prompts the user whether they want to save the final image."""
+    print("""\nDo you want to save the edited image?
+1. Yes
+2. No""")
+    save_choice = input("Enter your choice (1 or 2): ").strip()
+
+    if save_choice == "1":
+        file_name = input("Enter filename to save (e.g., my_drawing.png): ").strip()
+        
+        # Default extension if user forgets to type one
+        if not (file_name.endswith(".png") or file_name.endswith(".jpg") or file_name.endswith(".jpeg")):
+            file_name += ".png"
+
+        cv2.imwrite(file_name, image_to_save)
+        print(f"✅ Image successfully saved as '{file_name}'!")
+    elif save_choice == "2":
+        print("Image was not saved.")
+    else:
+        print("Invalid choice. Image was not saved.")
 
 def draw_on_image(target_image):
     """Prompts user for drawing inputs and applies them to target_image."""
@@ -31,6 +51,7 @@ def draw_on_image(target_image):
             cv2.imshow("Edited Image!", target_image)
             cv2.waitKey(0)
             cv2.destroyAllWindows()
+            save_edited_image(target_image)
 
         case 2:
             print("We are drawing a Rectangle!")
@@ -46,6 +67,7 @@ def draw_on_image(target_image):
             cv2.imshow("Edited Image!", target_image)
             cv2.waitKey(0)
             cv2.destroyAllWindows()
+            save_edited_image(target_image)
 
         case 3:
             print("We are drawing a circle!")
@@ -60,6 +82,7 @@ def draw_on_image(target_image):
             cv2.imshow("Edited Image!", target_image)
             cv2.waitKey(0)
             cv2.destroyAllWindows()
+            save_edited_image(target_image)
 
         case 4:
             print("We are adding text to the Image!")
@@ -70,8 +93,8 @@ def draw_on_image(target_image):
             pt3 = input("Enter BGR colors(0-255) separated by spaces: ").split()
             pt3_tuple = tuple(int(x) for x in pt3)
             thickness = int(input("Enter the thickness: "))
-            
-            
+            save_edited_image(target_image)
+                 
             cv2.putText(target_image, text, pt1_tuple, cv2.FONT_HERSHEY_SCRIPT_COMPLEX, font_scale, pt3_tuple, thickness)
             cv2.imshow("Edited Image!", target_image)
             cv2.waitKey(0)
