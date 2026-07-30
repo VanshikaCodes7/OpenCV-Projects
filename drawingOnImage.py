@@ -80,8 +80,8 @@ def draw_on_image(target_image):
         case _:
             print("Invalid Choice!")
 
-
-image = cv2.imread("Untitled design.png")
+img=cv2.imread("Untitled design.png")
+image = cv2.resize(img, (1280, 720))
 
 print("Welcome to drawing on Image Program!")
 print("You can consider the following dimensions for better styling or use a blank canvas!")
